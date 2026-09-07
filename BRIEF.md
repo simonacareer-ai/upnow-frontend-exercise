@@ -1,8 +1,8 @@
-# Frontend exercise — integrate login + public listings
+# Frontend exercise — integrate login, listings & stats
 
 ## The task
 
-Build two working screens in this repo against the real UpNow staging API.
+Build three working screens in this repo against the real UpNow staging API.
 
 ### 1. Public listings page
 
@@ -23,6 +23,15 @@ Build two working screens in this repo against the real UpNow staging API.
 - Persist the session and show something that proves it worked, e.g. the
   signed-in user from `GET /auth/me`.
 
+### 3. Stats dashboard
+
+- Pull portfolio numbers from `GET /reports/executive-summary` and render them as
+  headline stat cards.
+- Add one more view from a second stats endpoint — occupancy, upcoming renewals
+  or vacancy. A chart is welcome but a well-built table is equally fine.
+- These endpoints require the token from screen two, so this screen only works
+  once login does. Handle the signed-out case rather than letting it throw.
+
 Endpoint contracts, payload shapes and rate limits are all in
 **[API.md](./API.md)**. Credentials come separately.
 
@@ -37,6 +46,10 @@ cp .env.local.example .env.local
 npm install
 npm run dev      # http://localhost:3000
 ```
+
+**Before anything talks to the API**, set up the Next.js rewrite proxy described
+in section 1 of `API.md`. Calling staging directly from the browser is blocked by
+CORS, and that is expected — not a broken environment.
 
 Nothing else is set up — no data layer, no components, no fetch wrapper. How you
 put those in place is most of what we are looking at.
