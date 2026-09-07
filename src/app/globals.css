@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/*
+ * UpNow brand tokens — same values the production frontend uses, so anything
+ * built here drops into the real app without a re-skin.
+ */
+@theme inline {
+  /* Brand */
+  --color-primary:       #2e9f82;
+  --color-primary-dark:  #1a5a4a;
+  --color-primary-light: #d8f2e8;
+  --color-primary-50:    #f0faf6;
+
+  /* Gold */
+  --color-gold:          #d4a820;
+  --color-gold-light:    #f5d97a;
+
+  /* Surfaces */
+  --color-surface:       #fafaf8;
+  --color-base-100:      #f4f3ef;
+  --color-base-200:      #e8e6e0;
+
+  /* Text */
+  --color-neutral-900:   #1a1916;
+  --color-neutral-700:   #3d3b35;
+  --color-neutral-500:   #6b6860;
+  --color-neutral-400:   #9b9890;
+
+  /* Semantic */
+  --color-error:         #d43f3f;
+  --color-warning:       #e8a020;
+
+  --font-sans: 'Manrope', system-ui, sans-serif;
+}
+
+:root {
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
+  --radius: 0.75rem;
+}
+
+body {
+  font-family: var(--font-sans);
+}
