@@ -1,6 +1,9 @@
 # UpNow — frontend exercise starter
 
-Blank Next.js 16 app for the frontend hiring exercise. See [BRIEF.md](./BRIEF.md).
+Blank Next.js 16 app for the frontend hiring exercise.
+
+- [BRIEF.md](./BRIEF.md) — the task
+- [API.md](./API.md) — endpoint contracts
 
 ```bash
 npm install
