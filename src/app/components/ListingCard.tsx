@@ -1,14 +1,19 @@
+"use client";
+
 import Link from "next/link";
 import { MapPin, BedDouble, Bath, Maximize, Heart } from "lucide-react";
 import type { ListingItem } from "@/lib/types";
 
 function formatPrice(item: ListingItem): string | null {
-  const price =
+  const raw =
     item.askingPrice ??
     item.unit.askingPrice ??
+    (item.unit as unknown as Record<string, unknown>).rentalPrice ??
     (item as unknown as Record<string, unknown>).price;
-  if (!price || typeof price !== "number") return null;
-  return `AED ${price.toLocaleString()}`;
+  if (!raw) return null;
+  const n = typeof raw === "string" ? parseFloat(raw) : raw;
+  if (isNaN(n) || n <= 0) return null;
+  return `AED ${n.toLocaleString("en-AE", { maximumFractionDigits: 0 })}`;
 }
 
 function formatFrequency(item: ListingItem): string {
