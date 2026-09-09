@@ -7,9 +7,10 @@ import { cn } from "@/lib/cn";
 interface Props {
   currentPage: number;
   totalPages: number;
+  basePath?: string;
 }
 
-export default function Pagination({ currentPage, totalPages }: Props) {
+export default function Pagination({ currentPage, totalPages, basePath = "/listings" }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -18,7 +19,7 @@ export default function Pagination({ currentPage, totalPages }: Props) {
   function goTo(page: number) {
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", String(page));
-    router.push(`/?${params.toString()}`);
+    router.push(`${basePath}?${params.toString()}`);
   }
 
   const pages: (number | "...")[] = [];
@@ -39,7 +40,7 @@ export default function Pagination({ currentPage, totalPages }: Props) {
       <button
         onClick={() => goTo(currentPage - 1)}
         disabled={currentPage <= 1}
-        className="flex h-9 w-9 items-center justify-center rounded-lg text-neutral-500 transition-colors hover:bg-base-100 disabled:opacity-30"
+        className="flex h-9 w-9 items-center justify-center rounded-xl text-neutral-500 transition-colors hover:bg-base-100 disabled:opacity-30"
         aria-label="Previous page"
       >
         <ChevronLeft size={18} />
@@ -55,7 +56,7 @@ export default function Pagination({ currentPage, totalPages }: Props) {
             key={p}
             onClick={() => goTo(p)}
             className={cn(
-              "flex h-9 min-w-[36px] items-center justify-center rounded-lg text-sm font-medium transition-colors",
+              "flex h-9 min-w-[36px] items-center justify-center rounded-xl text-sm font-medium transition-colors",
               p === currentPage
                 ? "bg-primary text-white"
                 : "text-neutral-700 hover:bg-base-100",
@@ -70,7 +71,7 @@ export default function Pagination({ currentPage, totalPages }: Props) {
       <button
         onClick={() => goTo(currentPage + 1)}
         disabled={currentPage >= totalPages}
-        className="flex h-9 w-9 items-center justify-center rounded-lg text-neutral-500 transition-colors hover:bg-base-100 disabled:opacity-30"
+        className="flex h-9 w-9 items-center justify-center rounded-xl text-neutral-500 transition-colors hover:bg-base-100 disabled:opacity-30"
         aria-label="Next page"
       >
         <ChevronRight size={18} />

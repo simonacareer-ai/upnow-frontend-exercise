@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Inter, Roboto_Serif } from "next/font/google";
 import { AuthProvider } from "@/lib/auth-context";
 import Header from "./components/Header";
 import "./globals.css";
 
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-sans" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const robotoSerif = Roboto_Serif({
+  subsets: ["latin"],
+  variable: "--font-roboto-serif",
+});
 
 export const metadata: Metadata = {
   title: "UpNow — Find a Space You Can Trust",
@@ -16,8 +20,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={manrope.variable}>
-      <body className="min-h-screen bg-surface text-neutral-900 antialiased">
+    <html lang="en" className={`${inter.variable} ${robotoSerif.variable}`}>
+      <body className="min-h-screen bg-white text-neutral-900 antialiased">
         <AuthProvider>
           <Header />
           {children}

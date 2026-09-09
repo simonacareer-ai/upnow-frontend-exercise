@@ -6,9 +6,10 @@ import { Search, SlidersHorizontal } from "lucide-react";
 
 interface Props {
   emirates?: { code: string; nameEn: string }[];
+  basePath?: string;
 }
 
-export default function SearchFilters({ emirates }: Props) {
+export default function SearchFilters({ emirates, basePath = "/listings" }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
@@ -42,7 +43,7 @@ export default function SearchFilters({ emirates }: Props) {
     }
     params.delete("page");
     startTransition(() => {
-      router.push(`/?${params.toString()}`);
+      router.push(`${basePath}?${params.toString()}`);
     });
   }
 
@@ -55,7 +56,7 @@ export default function SearchFilters({ emirates }: Props) {
             e.preventDefault();
             applyFilters();
           }}
-          className="relative flex-1 min-w-[200px]"
+          className="relative min-w-[200px] flex-1"
         >
           <Search
             size={16}
@@ -66,7 +67,7 @@ export default function SearchFilters({ emirates }: Props) {
             placeholder="Search by name, location..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="h-10 w-full rounded-lg border border-base-200 bg-white pl-9 pr-3 text-sm outline-none transition-colors placeholder:text-neutral-400 focus:border-primary focus:ring-1 focus:ring-primary/30"
+            className="h-10 w-full rounded-xl border border-base-200 bg-white pl-9 pr-3 text-sm outline-none transition-colors placeholder:text-neutral-400 focus:border-primary focus:ring-1 focus:ring-primary/30"
           />
         </form>
 
@@ -77,7 +78,7 @@ export default function SearchFilters({ emirates }: Props) {
             setEmirate(e.target.value);
             applyFilters({ emirate: e.target.value });
           }}
-          className="h-10 rounded-lg border border-base-200 bg-white px-3 text-sm text-neutral-700 outline-none transition-colors focus:border-primary"
+          className="h-10 rounded-xl border border-base-200 bg-white px-3 text-sm text-neutral-700 outline-none transition-colors focus:border-primary"
         >
           <option value="">All Emirates</option>
           {emirates && emirates.length > 0
@@ -105,7 +106,7 @@ export default function SearchFilters({ emirates }: Props) {
         <button
           type="button"
           onClick={() => setShowPriceFilter((v) => !v)}
-          className="flex h-10 items-center gap-1.5 rounded-lg border border-base-200 bg-white px-3 text-sm text-neutral-700 transition-colors hover:bg-base-100"
+          className="flex h-10 items-center gap-1.5 rounded-xl border border-base-200 bg-white px-3 text-sm text-neutral-700 transition-colors hover:bg-base-100"
         >
           <SlidersHorizontal size={15} />
           Price
@@ -116,7 +117,7 @@ export default function SearchFilters({ emirates }: Props) {
           type="button"
           onClick={() => applyFilters()}
           disabled={isPending}
-          className="h-10 rounded-lg bg-primary px-5 text-sm font-medium text-white transition-colors hover:bg-primary-dark disabled:opacity-60"
+          className="h-10 rounded-xl bg-primary px-5 text-sm font-medium text-white transition-colors hover:bg-primary-dark disabled:opacity-60"
         >
           {isPending ? "Searching…" : "Search"}
         </button>
@@ -130,7 +131,7 @@ export default function SearchFilters({ emirates }: Props) {
             placeholder="Min price"
             value={minPrice}
             onChange={(e) => setMinPrice(e.target.value)}
-            className="h-9 w-32 rounded-lg border border-base-200 bg-white px-3 text-sm outline-none focus:border-primary"
+            className="h-9 w-32 rounded-xl border border-base-200 bg-white px-3 text-sm outline-none focus:border-primary"
           />
           <span className="text-sm text-neutral-400">—</span>
           <input
@@ -138,12 +139,12 @@ export default function SearchFilters({ emirates }: Props) {
             placeholder="Max price"
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
-            className="h-9 w-32 rounded-lg border border-base-200 bg-white px-3 text-sm outline-none focus:border-primary"
+            className="h-9 w-32 rounded-xl border border-base-200 bg-white px-3 text-sm outline-none focus:border-primary"
           />
           <button
             type="button"
             onClick={() => applyFilters()}
-            className="h-9 rounded-lg border border-primary px-3 text-sm text-primary transition-colors hover:bg-primary-50"
+            className="h-9 rounded-xl border border-primary px-3 text-sm text-primary transition-colors hover:bg-primary-50"
           >
             Apply
           </button>
