@@ -2,10 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
-import { requestOtp, verifyOtp } from "@/lib/api";
-import { ApiError } from "@/lib/api";
+import { requestOtp, verifyOtp, ApiError } from "@/lib/api";
 import { ArrowLeft, Loader2, Mail, KeyRound, CheckCircle2 } from "lucide-react";
 
 type Step = "email" | "otp" | "done";
@@ -21,8 +19,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleEmail(e: FormEvent) {
-    e.preventDefault();
+  async function sendOtp() {
     setError("");
     setLoading(true);
     try {
@@ -38,6 +35,11 @@ export default function LoginPage() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function handleEmail(e: FormEvent) {
+    e.preventDefault();
+    sendOtp();
   }
 
   async function handleOtp(e: FormEvent) {
@@ -208,7 +210,7 @@ export default function LoginPage() {
               </form>
 
               <button
-                onClick={() => handleEmail({ preventDefault: () => {} } as FormEvent)}
+                onClick={sendOtp}
                 disabled={loading}
                 className="mt-3 w-full text-center text-xs text-neutral-500 hover:text-primary disabled:opacity-50"
               >

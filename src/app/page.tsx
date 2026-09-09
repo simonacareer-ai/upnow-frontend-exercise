@@ -5,13 +5,15 @@ import Pagination from "./components/Pagination";
 import type { ListingsResponse } from "@/lib/types";
 import { Building2 } from "lucide-react";
 
-const API = "https://staging.upnow.ae/api";
+// Server components fetch the staging API directly (no CORS on the server).
+// Client components go through the Next.js rewrite proxy at /api.
+const SERVER_API = process.env.API_URL || "https://staging.upnow.ae/api";
 
 async function getListings(
   params: Record<string, string>,
 ): Promise<ListingsResponse> {
   const qs = new URLSearchParams(params);
-  const res = await fetch(`${API}/listings/units?${qs}`, {
+  const res = await fetch(`${SERVER_API}/listings/units?${qs}`, {
     next: { revalidate: 60 },
   });
   if (!res.ok) throw new Error(`Listings fetch failed: ${res.status}`);
@@ -20,7 +22,7 @@ async function getListings(
 
 async function getLocations() {
   try {
-    const res = await fetch(`${API}/listings/locations`, {
+    const res = await fetch(`${SERVER_API}/listings/locations`, {
       next: { revalidate: 300 },
     });
     if (!res.ok) return [];

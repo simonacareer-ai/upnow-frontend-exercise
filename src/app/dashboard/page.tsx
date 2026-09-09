@@ -12,7 +12,6 @@ import {
   DollarSign,
   TrendingUp,
   Users,
-  Loader2,
   LogIn,
   AlertTriangle,
 } from "lucide-react";

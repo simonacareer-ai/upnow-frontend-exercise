@@ -80,22 +80,25 @@ export default function SearchFilters({ emirates }: Props) {
           className="h-10 rounded-lg border border-base-200 bg-white px-3 text-sm text-neutral-700 outline-none transition-colors focus:border-primary"
         >
           <option value="">All Emirates</option>
-          {emirates?.map((e) => (
-            <option key={e.code} value={e.code}>
-              {e.nameEn}
-            </option>
-          ))}
-          {!emirates?.length && (
-            <>
-              <option value="DXB">Dubai</option>
-              <option value="AUH">Abu Dhabi</option>
-              <option value="SHJ">Sharjah</option>
-              <option value="AJM">Ajman</option>
-              <option value="RAK">Ras Al Khaimah</option>
-              <option value="FUJ">Fujairah</option>
-              <option value="UAQ">Umm Al Quwain</option>
-            </>
-          )}
+          {emirates && emirates.length > 0
+            ? emirates.map((e, i) => (
+                <option key={`${e.code}-${i}`} value={e.code}>
+                  {e.nameEn}
+                </option>
+              ))
+            : [
+                { code: "DXB", name: "Dubai" },
+                { code: "AUH", name: "Abu Dhabi" },
+                { code: "SHJ", name: "Sharjah" },
+                { code: "AJM", name: "Ajman" },
+                { code: "RAK", name: "Ras Al Khaimah" },
+                { code: "FUJ", name: "Fujairah" },
+                { code: "UAQ", name: "Umm Al Quwain" },
+              ].map((e) => (
+                <option key={e.code} value={e.code}>
+                  {e.name}
+                </option>
+              ))}
         </select>
 
         {/* Price filter toggle */}

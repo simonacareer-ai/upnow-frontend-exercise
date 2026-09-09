@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { ArrowLeft, MapPin, Building2, BedDouble, Bath, Maximize, Layers } from "lucide-react";
 
-const API = "https://staging.upnow.ae/api";
+const SERVER_API = process.env.API_URL || "https://staging.upnow.ae/api";
 
 async function getUnit(id: string) {
-  const res = await fetch(`${API}/listings/units/${id}`, {
+  const res = await fetch(`${SERVER_API}/listings/units/${id}`, {
     next: { revalidate: 60 },
   });
   if (!res.ok) throw new Error(`Unit fetch failed: ${res.status}`);
