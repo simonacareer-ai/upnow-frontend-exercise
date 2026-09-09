@@ -68,8 +68,14 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-[calc(100vh-56px)]">
       {/* Left panel — brand illustration */}
-      <div className="hidden flex-1 items-end bg-gradient-to-br from-primary-dark via-primary to-primary-light p-10 lg:flex">
-        <div className="max-w-md">
+      <div className="relative hidden flex-1 overflow-hidden lg:block">
+        <img
+          src="/images/auth-hero.jpg"
+          alt="UpNow — Find a space you can trust"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 via-transparent to-transparent" />
+        <div className="absolute bottom-0 left-0 p-10">
           <h2 className="text-3xl font-bold text-white">
             Find a space you can trust.
           </h2>
